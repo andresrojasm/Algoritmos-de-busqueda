@@ -2,13 +2,20 @@
 
 using namespace std;
 
-int busquedaSecuencial(int arr[], int tama_o, int inc){
-    int i;
-    for(i=0; i<tama_o; i++){
-        if (arr[i]==inc){
-        return i;
+int busquedaBinaria(int arr[],int inicio, int fin, int inc){
+    int centro;
+    if(inicio<=fin){
+        centro = ((fin-inicio)/2)+inicio;
+        cout<< centro << ", "<< inicio<< ", "<< fin<< "\n"<< endl;
+        if(arr[centro] ==inc){
+            return centro;
+        }else if(inc < arr[centro]){
+            return busquedaBinaria(arr,inicio,centro-1,inc);
+        }else{
+            return busquedaBinaria(arr, centro+1, fin, inc);
         }
-    }return -1;
+    }
+    return -1;
 }
 
 int main()
@@ -30,7 +37,7 @@ int main()
     cout<< "que numero desea buscar"<< endl;
     cin>> dato;
 
-    resultado = busquedaSecuencial(arr, tama_o-1, dato);
+    resultado = busquedaBinaria(arr, 0, tama_o-1, dato);
 
     cout << resultado << endl;
     return 0;
